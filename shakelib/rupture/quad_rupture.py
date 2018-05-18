@@ -414,7 +414,60 @@ class QuadRupture(Rupture):
             f.write(u'>\n')
         if not hasattr(rupturefile, 'read'):
             f.close()
-
+    
+    @classmethod
+    def fromOrientation(cls, orientation):
+        """
+        Create a QuadDrupture instance from a known point, shape, and orientation.
+        
+        A point is defined as a set of latitude, longitude, and depth, which
+        is located in the corner between the tail of the vector pointing in
+        the strike direction and the dip direction (nearest to the surface).
+        The shape is defined by length, width, dx, and dy. The length is the
+        measurement of the quadrilateral in the direction of strike, and 
+        width is the measurement of quadrilateral in the direction of dip.
+        Dx is the measurement on the plane in the strike direction between
+        the known point and the corner between the tail of the vector pointing
+        in the strike direction and the dip direction (nearest to the surface).
+        Dy is the measurement on the plane in the dip direction between
+        the known point and the corner between the tail of the vector pointing
+        in the strike direction and the dip direction (nearest to the surface).
+        The orientation is defined by azimuth and angle from
+        horizontal, strike and dip respectively. For example in plane view:
+            ::
+                            strike direction
+                        p1*------------------->>p2
+                        *        | dy           |
+                 dip    |--------o              |
+              direction |   dx    known point   | Width
+                        V                       |
+                        V                       |
+                        p3----------------------p2
+                                Length
+                                
+        Note:
+            The a dictionary of point, shape, and orientation should be as
+            follows:
+                example_dict = {
+                        "origin" : (Origin) ShakeMap Origin object,
+                        "point" : {
+                                "lat" : (float) latitude in degrees,
+                                "lon" : (float) longitude in degrees,
+                                "depth" : (float) depth in kilometers,
+                        },
+                        "width" : (float) measurement in kilometerS
+                
+                }
+                                
+        Args:
+            orientation (dictionary): Dictionary containing information about
+                the point, shape, and orientation.
+        
+                
+        
+        """
+        
+    
     @classmethod
     def fromVertices(cls,
                      xp0, yp0, zp0, xp1, yp1, zp1,

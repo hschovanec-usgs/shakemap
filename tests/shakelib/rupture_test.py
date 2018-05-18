@@ -163,6 +163,7 @@ def test_rupture_from_dict():
     rup_original = get_rupture(origin)
     d = rup_original._geojson
     rup_from_dict = rupture_from_dict(d)
+    print()
     assert rup_from_dict.lats == 37.3
     assert rup_from_dict.lons == -122.5
 
@@ -225,6 +226,7 @@ def test_EdgeRupture():
         [botlons[1]], [botlats[1]], [botdeps[1]],
         [botlons[0]], [botlats[0]], [botdeps[0]],
         origin)
+    print(qrup._origin)
     np.testing.assert_allclose(erup.getArea(), 1108.9414759967776)
     np.testing.assert_allclose(erup.getDepthToTop(), 0)
     np.testing.assert_allclose(erup.getLength(), 111.19492664455889)
